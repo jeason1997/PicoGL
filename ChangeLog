@@ -1,0 +1,47 @@
+2005-11-08  Jim Huang  <jserv@kaffe.org>
+
+	* src/zbuffer.c (ZB_copyFrameBufferRGB24): Minor tweak for GCC 4.x
+
+2005-06-29  Jim Huang  <jserv@kaffe.org>
+
+	* AUTHORS,
+	LICENCE:
+	Update contact information.
+
+2005-04-03  Daniel Leo  <grayrover@gmail.com>
+
+	* backends/vesafb/tk.c,
+	backends/vesafb/kbd.c,
+	backends/vesafb/kbd.h,
+	backends/vesafb/keymap_standard.h:
+	Add simple keyboard handling routines for vesafb.
+	Note: incomplete.
+	
+2005-03-17  Daniel Leo  <grayrover@gmail.com>
+
+	* configure.ac,
+	backends/vesafb:
+	Add new backend: vesafb
+	Note: incomplete.
+	TODO: keyboard handling.
+
+2005-03-14  Daniel Leo  <grayrover@gmail.com>
+
+	* configure.ac,
+	examples/Makefile.am:
+	Fix Nano-X build.
+
+2005-03-13  Jim Huang  <jserv@kaffe.org>
+
+	* include/GL/internal/math-sll.h,
+	examples/texobj.c:
+	Use fixed-pointing math API.
+	
+	* configure.ac,
+	examples/Makefile.am:
+	Add gcc compilation flags with fixed-pointing.
+	Note: incomplete.
+
+2005-03-04  Jim Huang  <jserv@kaffe.org>
+
+	* Initial PicoGL based on TinyGL 0.4

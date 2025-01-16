@@ -1,0 +1,23 @@
+PicoGL is based on TinyGL 0.4 with the changes:
+  . Introduce new graphic backends.
+  . Use autotool to manage the configuration
+  . Fixed-pointing math support
+
+For information about TinyGL, see the file README.TinyGL
+
+Currently, PicoGL supports the following backends:
+  . X11
+  . Nano-X
+  . SDL
+  . vesafb
+
+The configuration of PicoGL could be done by passing the options to
+./configure script:
+
+  . --with-backend=GFX
+    Select which backend you would like to use, here GFX must be x11, 
+    nano-x, or sdl.
+
+  . --enable-fixed-point
+    Enable fixed-pointing support of PicoGL. It's useful with non-x86
+    machines.
