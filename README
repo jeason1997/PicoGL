@@ -21,3 +21,44 @@ The configuration of PicoGL could be done by passing the options to
   . --enable-fixed-point
     Enable fixed-pointing support of PicoGL. It's useful with non-x86
     machines.
+
+
+可能没法直接编译，需要做一些修改，参考：https://blog.csdn.net/yyz_1987/article/details/126754020
+交叉编译PicoGL
+
+首先是picogl的一处bug，在backends/vesafb/tk.c的第一行增加宏
+#define _FB_TK_
+
+然后把backends/vesafb/glx_impl.h里面的
+struct fb_fix_screeninfo FixedInfo;
+struct fb_var_screeninfo VarInfo, OrigVarInfo;
+修改为
+#ifdef _FB_TK_
+struct fb_fix_screeninfo FixedInfo;
+struct fb_var_screeninfo VarInfo, OrigVarInfo;
+#else
+extern struct fb_fix_screeninfo FixedInfo;
+extern struct fb_var_screeninfo VarInfo, OrigVarInfo;
+#endif
+这是因为有好几个文件调用了backends/vesafb/glx_impl.h，如果不这么改，会出现多重定义错误。
+
+然后，为了让你的程序使用picogl更方便些，最好再改个地方include/GL/glx.h
+#include GLX_IMPL_HEADER
+改为你喜欢的方式，指向backends/vesafb/glx_impl.h
+修改backends/vesafb/tk.c中，initialize_fbdev函数有关VarInfo的设置，改为适合你的LCD的。
+
+配置
+# cd PicoGL
+$CC=/opt/crosstool/gcc-3.4.5-glibc-2.3.6/arm-softfloat-linux-gnu/bin/arm-softfloat-linux-gnu-gcc 
+./configure --with-backend=vesafb --host=arm-softfloat-linux-gnu --prefix=/home/yang/builtPicoGL
+
+说明
+CC=设置交叉编译器的位置
+--with-backend=vesafb指定使用FB作为显示设备
+host=arm- softfloat-linux-gnu设定交叉编译
+--prefix=/home/yang/builtPicoGL设定编译后库和示例程序安装位置。
+
+最后
+$make
+$make install
+在/home/lxz/builtPicoGL/lib里就有PicoGL的库了，把动态库文件拷贝到arm-linux根文件系统的/lib 里面。
