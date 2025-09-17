@@ -4,6 +4,8 @@ PicoGL is based on TinyGL 0.4 with the changes:
   . Fixed-pointing math support
 
 For information about TinyGL, see the file README.TinyGL
+https://bellard.org/TinyGL/
+https://github.com/jeason1997/tinygl?tab=readme-ov-file
 
 Currently, PicoGL supports the following backends:
   . X11
